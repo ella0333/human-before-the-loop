@@ -1,0 +1,19 @@
+{
+  "continual-harness": {
+    "upstream": "https://github.com/sethkarten/continual-harness",
+    "release": "v5.0.0",
+    "commit": "62bf6f614b66ff76b79954e5a3f04f91c3c6a049",
+    "scaffold": "simplest",
+    "prompt_optimization": false,
+    "local_patches": [
+      "Allow OPENROUTER_BASE_URL for the evaluator's routing, credit-pause, call-cap, and cost gate.",
+      "Expose flags.has_pokedex from Pokemon Red's actual event flag instead of inferred seen/caught counts.",
+      "Register the upstream run.py max_steps parameter in its CLI parser so the documented agent loop can receive the evaluation cap.",
+      "For this evaluation only, deterministically press START and select NEW GAME before model scoring begins."
+    ]
+  },
+  "pokemon-agent": {
+    "upstream": "https://github.com/NousResearch/pokemon-agent",
+    "version": "0.1.0"
+  }
+}

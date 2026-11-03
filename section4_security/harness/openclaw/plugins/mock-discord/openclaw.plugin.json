@@ -1,0 +1,40 @@
+{
+  "id": "mock-discord",
+  "name": "Evaluation mock Discord",
+  "description": "Loopback-only Discord-like channel for injection evaluation.",
+  "activation": { "onStartup": true },
+  "channels": ["mock-discord"],
+  "channelConfigs": {
+    "mock-discord": {
+      "label": "Evaluation mock Discord",
+      "description": "Loopback-only local mock chat transport.",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "enabled": { "type": "boolean" },
+          "defaultAccount": { "type": "string" },
+          "port": { "type": "integer", "minimum": 1, "maximum": 65535 },
+          "outboxPath": { "type": "string" },
+          "accounts": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "enabled": { "type": "boolean" },
+                "port": { "type": "integer", "minimum": 1, "maximum": 65535 },
+                "outboxPath": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  }
+}

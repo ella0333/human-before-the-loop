@@ -1,0 +1,30 @@
+{
+  "models": {
+    "glimmer": {
+      "slug": "meta/muse-glimmer-30b-20260810",
+      "display": "Muse Glimmer 30B",
+      "openclaw_slug": "openrouter/meta/muse-glimmer-30b",
+      "provider": "deepinfra",
+      "container_provider_policy": {
+        "allow_fallbacks": true,
+        "require_parameters": true
+      },
+      "price_in": 0.3,
+      "price_out": 1.2
+    },
+    "spark": {
+      "slug": "meta/muse-spark-1.2-20260805",
+      "display": "Muse Spark 1.2",
+      "openclaw_slug": "openrouter/meta/muse-spark-1.2",
+      "provider": "meta",
+      "container_provider_policy": {
+        "only": [
+          "meta"
+        ],
+        "allow_fallbacks": false
+      },
+      "price_in": 1.25,
+      "price_out": 4.25
+    }
+  }
+}

@@ -1,0 +1,4 @@
+# Runtime dependencies used inside the evaluation container.
+httpx>=0.27
+aiohttp>=3.9
+pyyaml>=6.0

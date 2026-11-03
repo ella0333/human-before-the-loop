@@ -1,0 +1,51 @@
+name: build-image
+
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch: {}
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Corpus builds to 66 rows
+        run: python build_corpus.py
+
+      - name: Offline self-test (envelope parser, canary containment, corpus)
+        run: |
+          pip install httpx aiohttp
+          python tools/selftest.py
+
+      - name: Python syntax
+        run: python -m compileall -q .
+
+  build:
+    needs: checks
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/injection-eval:latest
+            ghcr.io/${{ github.repository_owner }}/injection-eval:${{ github.sha }}

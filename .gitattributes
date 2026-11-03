@@ -1,0 +1,4 @@
+# Raw evaluation evidence must survive clone byte-for-byte. Disable all
+# line-ending translation; without this, core.autocrlf rewrites the logs and
+# transcripts on checkout and their recorded SHA-256 hashes stop matching.
+* -text

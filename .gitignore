@@ -1,0 +1,41 @@
+# Secrets. Never commit these.
+config.env
+.env
+*.pem
+*.key
+openrouter.key
+id_ed25519
+id_ed25519.pub
+
+# Build noise.
+__pycache__/
+*.py[cod]
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+
+# Third-party code the harnesses cannot run without is included, at a pinned
+# commit and under its upstream MIT licence: section 4's AgentDojo attack
+# templates, and section 6's Continual Harness scaffold, which carries the four
+# evaluation changes recorded in vendor_pins.json. Anything a user clones for
+# themselves stays ignored.
+*/harness/vendor/*
+!section4_security/harness/vendor/
+!section6_capability/harness/vendor/continual-harness/
+
+# Licensed game material and emulator state, supplied locally by the operator.
+*/harness/local_runtime/
+*/harness/**/*.gb
+*/harness/**/*.gbc
+*/harness/**/*.gba
+*/harness/**/*.sav
+*/harness/**/*.sgm
+
+# Synthetic agent workspace, rebuilt per session.
+_home/
+node_modules/
+
+# New runs. The committed result sets live under */results/ and are tracked.
+*/harness/results/
+*/*/harness/results/

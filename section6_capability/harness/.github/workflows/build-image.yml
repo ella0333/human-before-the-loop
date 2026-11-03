@@ -1,0 +1,60 @@
+name: build-image
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install requests aiohttp
+      - name: Repository safety
+        run: python tools/check_repo_safety.py
+      - name: Offline contract tests
+        run: |
+          python tools/selftest.py
+          python tools/test_openrouter_gate.py
+      - name: Python syntax
+        run: python -m compileall -q evalspec.py constrained continual_eval openclaw_eval tools
+
+  build:
+    needs: checks
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/pokemon-tutorial-eval:latest
+            ghcr.io/${{ github.repository_owner }}/pokemon-tutorial-eval:${{ github.sha }}
+      - name: Runtime smoke test (no model calls)
+        run: |
+          image="ghcr.io/${{ github.repository_owner }}/pokemon-tutorial-eval:${{ github.sha }}"
+          docker run -d --name pokemon-eval-smoke \
+            -e OPENROUTER_API_KEY=smoke-not-a-real-key "$image"
+          for attempt in $(seq 1 120); do
+            if docker exec pokemon-eval-smoke test -f /run/pokemon-eval/ready; then
+              break
+            fi
+            sleep 2
+          done
+          docker exec pokemon-eval-smoke test -f /run/pokemon-eval/ready
+          docker exec pokemon-eval-smoke python /app/tools/runtime_preflight.py
+          docker exec pokemon-eval-smoke python /app/vendor/continual-harness/run.py --help | grep -- --max-steps
+          docker rm -f pokemon-eval-smoke

@@ -1,0 +1,8 @@
+{
+  "id": "pokemon-tools",
+  "name": "Pokemon Evaluation Tools",
+  "description": "Native tools for observing and controlling the official pokemon-agent server.",
+  "contracts": { "tools": ["pokemon_observe", "pokemon_action"] },
+  "activation": { "onStartup": true },
+  "configSchema": { "type": "object", "additionalProperties": false }
+}

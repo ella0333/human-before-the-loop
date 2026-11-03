@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "evalagent"
+version = "0.1.0"
+description = "Constrained menu-schema agent for the reliability evaluation"
+requires-python = ">=3.10"
+dependencies = ["aiohttp>=3.9"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["evalagent*"]

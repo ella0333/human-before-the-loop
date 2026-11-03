@@ -1,0 +1,13 @@
+.git
+.github
+.env
+results
+_home
+_home_sessions
+**/__pycache__
+**/*.pyc
+**/node_modules
+**/dist
+*.egg-info
+.venv
+venv
