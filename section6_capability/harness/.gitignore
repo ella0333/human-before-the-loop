@@ -21,3 +21,6 @@ roms/
 
 results/
 keys/
+
+runtime/pokemon-access/
+runtime/map_database.json

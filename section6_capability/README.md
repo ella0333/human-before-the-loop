@@ -87,13 +87,16 @@ deterministic START / NEW GAME bootstrap described above.
 
 ## The ROM is the only thing you supply
 
-Everything else the local cells need is bundled in `harness/runtime/`:
+Everything else the local cells need is in `harness/runtime/`. The emulator is
+included, and the staging step below downloads the other two:
 
-| Bundled | What it is |
-|---|---|
-| `runtime/VBA-RR/` | the VBA-ReRecording emulator build (`vba.exe`, `lua51.dll`) the bridge drives |
-| `runtime/emulator-access/` | Pokémon Access 3.1.0, the Lua accessibility scripts `constrained/pokemon_bridge.lua` loads |
-| `runtime/map_database.json` | the tile/map database used for navigation |
+| Component | What it is | License |
+|---|---|---|
+| `runtime/VBA-RR/` | the VBA-ReRecording emulator build (`vba.exe`, with LuaJIT 2.0.4 as `lua51.dll`) the bridge drives, included as used in the paper | GPL v2 for [VBA-RR](https://github.com/TASEmulators/vba-rerecording), MIT for [LuaJIT](https://luajit.org/); both texts are in `runtime/VBA-RR/` |
+| `runtime/pokemon-access/` | [Pokémon Access](https://github.com/nuive/pokemon-access) 3.1.0 at commit 2deb98f, the Lua accessibility scripts `constrained/pokemon_bridge.lua` loads | None published, so it is downloaded and not part of this repo |
+| `runtime/map_database.json` | the tile/map database used for navigation, built from [pret/pokered](https://github.com/pret/pokered) at a pinned commit by `tools/prepare_maps.py` | None published, so it is built locally and not part of this repo |
+
+Pokémon is a trademark of Nintendo, Creatures and Game Freak.
 
 Set one variable in the repository's `config.env`:
 
@@ -107,9 +110,10 @@ and `.state` are all refused by `tools/check_repo_safety.py`. The emulator's
 `battery/` and `save/` directories ship empty.
 
 `LOCAL_VBA_DIR`, `LOCAL_MAP_DB`, and `LOCAL_EMULATOR_ACCESS_DIR` are optional
-overrides if you want your own copies. Leave them unset to use the bundled ones.
+overrides if you want your own copies. Leave them unset to use the ones above.
 
-Then stage a sealed baseline. This is one-shot by design and refuses to merge with
+Then stage a sealed baseline. This downloads Pokémon Access and builds the map
+database the first time, and it is one-shot by design and refuses to merge with
 an existing baseline:
 
 ```powershell

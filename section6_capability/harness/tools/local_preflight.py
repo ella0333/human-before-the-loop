@@ -26,7 +26,7 @@ async def main() -> int:
         "POKEMON_EVAL_SAVE_BASE": str(attempt / "saves"),
         "POKEMON_EVAL_LUA_SAVE_BASE": str(attempt / "saves"),
         "POKEMON_EVAL_BRIDGE_DIR": str(attempt / "saves/_bridge"),
-        "POKEMON_EVAL_POKEMON_ACCESS": str(attempt / "emulator-access"),
+        "POKEMON_EVAL_POKEMON_ACCESS": str(attempt / "pokemon-access"),
         "POKEMON_EVAL_MAP_DB": str(attempt / "map_database.json"),
     })
     from constrained.helpers.pokemon_game import PokemonGame, read_state

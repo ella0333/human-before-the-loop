@@ -126,8 +126,10 @@ Red specifically, not Blue or Yellow, because completion is detected by reading
 Red's Pokédex flag out of emulator memory. `setup.py` puts its path in
 `LOCAL_ROM_PATH`.
 
-That is the only file you need to provide. The VBA-RR emulator, the Lua scripts, and the
-map database are already in `section6_capability/harness/runtime/`.
+That is the only file you need to provide. The VBA-RR emulator is included in
+`section6_capability/harness/runtime/`, and the staging step below downloads the
+Pokémon Access Lua scripts and builds the map database. The third-party licenses
+are listed in `section6_capability/README.md`.
 
 **The four local cells run on Windows only.** The constrained and hybrid cells
 drive VBA-RR, a Windows emulator with no Linux or macOS build, so they run locally
@@ -202,4 +204,4 @@ evidence behind those scores.
   what it decided, what happened, and the associated usage/state evidence.
 
 The workbooks replace the earlier loose CSV/JSONL exports; the original source
-runs remain reproducible through the harnesses and repository history.
+runs remain reproducible through the harnesses.

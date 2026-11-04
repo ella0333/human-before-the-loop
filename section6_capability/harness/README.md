@@ -50,8 +50,7 @@ The licensed Red ROM remains at:
 `local_runtime/baseline_red`. Each cell copies that baseline into a unique
 `local_runtime/attempts/<id>`, including a private ROM copy, VBA-RR copy,
 save directory, Lua bridge directory, and metadata. Source checksums are
-verified before and after every session. The older Blue baseline and saves are
-not read or modified.
+verified before and after every session.
 
 ## Commands
 

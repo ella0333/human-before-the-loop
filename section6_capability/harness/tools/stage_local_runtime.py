@@ -4,15 +4,50 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
+import io
 import json
 import os
 import shutil
+import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
+
+import requests
 
 ROOT = Path(__file__).resolve().parents[1]
 BASELINE = ROOT / "local_runtime" / "baseline_red"
 RUNTIME = ROOT / "runtime"
+
+ACCESS_COMMIT = "2deb98f38a4e6674ff60af6f9419be22865f1f39"
+ACCESS_URL = f"https://github.com/nuive/pokemon-access/archive/{ACCESS_COMMIT}.zip"
+
+
+def download(url: str) -> bytes:
+    resp = requests.get(url, timeout=300)
+    resp.raise_for_status()
+    return resp.content
+
+
+def fetch_runtime() -> None:
+    access_dir = RUNTIME / "pokemon-access"
+    if not (access_dir / "pokemon.lua").is_file():
+        print("Downloading pokemon-access...")
+        zf = zipfile.ZipFile(io.BytesIO(download(ACCESS_URL)))
+        prefix = f"pokemon-access-{ACCESS_COMMIT}/"
+        for name in zf.namelist():
+            if not name.startswith(prefix) or name.endswith("/"):
+                continue
+            target = access_dir / name[len(prefix):]
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(zf.read(name))
+
+    map_db = RUNTIME / "map_database.json"
+    if not map_db.is_file():
+        spec = importlib.util.spec_from_file_location("prepare_maps", ROOT / "tools" / "prepare_maps.py")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        module.main(map_db)
 
 
 def load_config() -> dict[str, str]:
@@ -67,10 +102,11 @@ def main() -> None:
     parser.add_argument("--pokemon-access", type=Path,
                         default=config.get("LOCAL_EMULATOR_ACCESS_DIR")
                         or config.get("LOCAL_POKEMON_ACCESS")
-                        or RUNTIME / "emulator-access")
+                        or RUNTIME / "pokemon-access")
     args = parser.parse_args()
     if not args.rom:
         raise SystemExit("supply --rom, or set LOCAL_ROM_PATH in config.env (python setup.py)")
+    fetch_runtime()
     title = args.rom.read_bytes()[0x134:0x143].rstrip(b"\x00").decode("ascii", "replace")
     if not title.startswith("POKEMON RED"):
         raise SystemExit(f"--rom reports itself as {title!r}, not POKEMON RED. "

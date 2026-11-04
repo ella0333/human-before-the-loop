@@ -2,10 +2,10 @@
 
 ## 1. Local baseline
 
-To stage the local baseline on a Windows host, set the three `LOCAL_*` paths in `.env`, then run:
+To stage the local baseline on a Windows host, run `python setup.py` from the repository root so `LOCAL_ROM_PATH` is set, then run:
 
 ```powershell
-python tools/stage_local_runtime.py --vba-dir <VBA-RR_DIR> --rom <POKEMON_RED_ROM> --map-db <MAP_DATABASE_JSON> --pokemon-access <POKEMON_ACCESS_DIR>
+python tools/stage_local_runtime.py
 ```
 
 This is intentionally one-shot and refuses to merge with an existing baseline.
