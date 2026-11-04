@@ -18,6 +18,9 @@ Three evaluations were run to validate the security measures, while measuring an
 Each evaluation directory contains its harnesses and raw results. Paper figures
 are collected in the top-level `figures/` directory.
 
+[hbtl-pokemon-eval](https://github.com/ella0333/hbtl-pokemon-eval) is a standalone
+harness for testing LLMs in this framework.
+
 In sections 4 and 5, both our constrained agent and OpenClaw run inside a Docker container. In section 6, our constrained agent and the hybrid agent run locally on Windows, and the tool-calling Pokémon harness runs in a container.
 
 ---
