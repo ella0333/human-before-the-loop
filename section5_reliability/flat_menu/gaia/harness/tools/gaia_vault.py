@@ -1,4 +1,4 @@
-"""Seal and open the GAIA raw turns. See additional_results/flat_menu/README.md."""
+"""Seal and open the GAIA raw turns. See section5_reliability/flat_menu/README.md."""
 from __future__ import annotations
 
 import gzip

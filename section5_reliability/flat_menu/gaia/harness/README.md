@@ -68,7 +68,7 @@ immediately and includes the measured judge cost in its full-run projection.
 ## Run
 
 ```powershell
-Set-Location additional_results/flat_menu/gaia/harness
+Set-Location section5_reliability/flat_menu/gaia/harness
 python -m pip install -r requirements.txt
 python build_corpus.py --download
 python tools/selftest.py

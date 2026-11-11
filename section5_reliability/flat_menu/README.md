@@ -1,4 +1,4 @@
-# Additional results: flattened menu
+# Section 5 additional results: flattened menu
 
 The constrained framework from section 5 rerun with its menu hierarchy removed.
 Every option the nested menu offers is listed on a single screen, so the agent
@@ -54,7 +54,7 @@ added. They are configured by `python setup.py` at the repository root, and the
 GAIA suite has the same Tavily and HuggingFace requirements as section 5.
 
 ```powershell
-cd additional_results/flat_menu/synthetic/harness
+cd section5_reliability/flat_menu/synthetic/harness
 python build_corpus.py
 python tools/selftest.py
 python orchestrator.py --pilot --flat-menu
@@ -63,7 +63,7 @@ python post_experiment.py results\run_<timestamp> --classify --max-wait 86400
 ```
 
 ```powershell
-cd additional_results/flat_menu/gaia/harness
+cd section5_reliability/flat_menu/gaia/harness
 python build_corpus.py --download
 python tools/selftest.py
 python orchestrator.py --pilot --flat-menu
@@ -93,7 +93,7 @@ The GAIA turn rows are sealed the same way as in section 5, because they quote
 the gated GAIA questions. Anyone with their own copy of the dataset can open them:
 
 ```powershell
-cd additional_results/flat_menu/gaia/harness
+cd section5_reliability/flat_menu/gaia/harness
 python build_corpus.py --download
 python tools/restore_gaia_fields.py
 ```

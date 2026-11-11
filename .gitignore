@@ -39,3 +39,4 @@ node_modules/
 # New runs. The committed result sets live under */results/ and are tracked.
 */harness/results/
 */*/harness/results/
+*/*/*/harness/results/

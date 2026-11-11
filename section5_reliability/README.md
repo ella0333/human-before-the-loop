@@ -126,4 +126,11 @@ One limit worth stating plainly: a model that answered a task correctly reveals
 that answer in its own output, which sits in `Outcomes`. Sealing the prompts
 reduces exposure rather than eliminating it.
 
+## Additional results: flattened menu
+
+`flat_menu/` reruns the constrained arm on both suites with the menu hierarchy
+removed, so every option sits on one screen. Its harnesses are copies of the two
+above with a `--flat-menu` flag, and its results are packaged the same way, with
+the GAIA turns sealed. `flat_menu/README.md` has the results and how to run it.
+
 Paper figures are in the repository-level `figures/` directory.

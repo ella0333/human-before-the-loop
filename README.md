@@ -18,9 +18,9 @@ Three evaluations were run to validate the security measures, while measuring an
 Each evaluation directory contains its harnesses and raw results. Paper figures
 are collected in the top-level `figures/` directory.
 
-`additional_results/` holds results outside the three paper sections.
-`additional_results/flat_menu/` reruns the section 5 constrained framework with its
-menu hierarchy removed, so every option sits on one screen.
+`section5_reliability/flat_menu/` holds an additional reliability result: the
+section 5 constrained framework rerun with its menu hierarchy removed, so every
+option sits on one screen.
 
 [hbtl-pokemon-eval](https://github.com/ella0333/hbtl-pokemon-eval) is a standalone
 harness for testing LLMs in this framework.
@@ -90,7 +90,9 @@ ends. The first build of each image takes several minutes; later runs reuse it.
 
 The harness directories are `section4_security/harness`,
 `section4_security/least_privilege/harness`,
-`section5_reliability/synthetic/harness`, `section5_reliability/gaia/harness`
+`section5_reliability/synthetic/harness`, `section5_reliability/gaia/harness`,
+`section5_reliability/flat_menu/synthetic/harness`,
+`section5_reliability/flat_menu/gaia/harness`
 and `section6_capability/harness`. Each section's own `README.md` covers its
 result files, resume behavior, and options. Each harness's `SETUP.md` holds
 operator notes.

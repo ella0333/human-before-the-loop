@@ -8,7 +8,7 @@ machine. `setup.py` checks all three. No HuggingFace token is ever sent to the
 container; the prepared manifest is uploaded with a checksum instead.
 
 ```powershell
-Set-Location additional_results/flat_menu/gaia/harness
+Set-Location section5_reliability/flat_menu/gaia/harness
 python -m pip install -r requirements.txt
 python build_corpus.py --download
 python tools/selftest.py
@@ -31,7 +31,7 @@ before any paid session if they differ.
 ## Pilot and full run
 
 ```powershell
-Set-Location additional_results/flat_menu/gaia/harness
+Set-Location section5_reliability/flat_menu/gaia/harness
 python orchestrator.py --pilot
 ```
 
