@@ -25,6 +25,9 @@ option sits on one screen.
 [hbtl-pokemon-eval](https://github.com/ella0333/hbtl-pokemon-eval) is a standalone
 harness for testing LLMs in this framework.
 
+[Eli Felse](https://elifelse.org/dev/open-source) is a fully open-source
+implementation of the framework described in the paper.
+
 In sections 4 and 5, both our constrained agent and OpenClaw run inside a Docker container. In section 6, our constrained agent and the hybrid agent run locally on Windows, and the tool-calling Pokémon harness runs in a container.
 
 ---
