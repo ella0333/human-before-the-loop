@@ -18,6 +18,10 @@ Three evaluations were run to validate the security measures, while measuring an
 Each evaluation directory contains its harnesses and raw results. Paper figures
 are collected in the top-level `figures/` directory.
 
+`additional_results/` holds results outside the three paper sections.
+`additional_results/flat_menu/` reruns the section 5 constrained framework with its
+menu hierarchy removed, so every option sits on one screen.
+
 [hbtl-pokemon-eval](https://github.com/ella0333/hbtl-pokemon-eval) is a standalone
 harness for testing LLMs in this framework.
 

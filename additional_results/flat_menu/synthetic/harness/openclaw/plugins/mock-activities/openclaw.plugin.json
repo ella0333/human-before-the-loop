@@ -1,0 +1,14 @@
+{
+  "id": "mock-activities",
+  "name": "Reliability Evaluation Mock Activities",
+  "description": "Contained native tools mirroring every constrained-menu activity.",
+  "contracts": {
+    "tools": [
+      "mock_discord_read", "mock_ai_chat", "mock_video_game", "mock_table_game",
+      "mock_journal_write", "mock_document_write", "mock_music_make",
+      "mock_social_browse", "mock_website_check", "mock_web_search", "mock_read"
+    ]
+  },
+  "activation": { "onStartup": true },
+  "configSchema": { "type": "object", "additionalProperties": false }
+}
